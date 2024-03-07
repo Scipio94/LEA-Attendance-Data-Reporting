@@ -1,2 +1,2 @@
 # Quarterly Report Attendance
-Query to clean data and calculate staff attendance for Quarter(Q2), October - December.
+Data cleaning and calculation of staff attendance for Quarter(Q2), October - December.
