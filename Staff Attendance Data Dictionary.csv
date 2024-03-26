@@ -1,0 +1,15 @@
+Column,Definiton
+Employee Id,Employee Id
+First_Name,First name of employee
+Last_Name,Last name of employee
+Campus,Campus the employee works
+Month,Month of attendance period
+Days_Present,Days employee was present
+Possible_Days,Schools_Days minus excused absences
+School_Days,Total school days in the month
+Staff_In_Service_Days,"Days staff are required to work, but school is closed for students"
+Schools Days Missed,Possible_Days minus Days_Present
+Total Days Missed,Staff_in_Service_Days minus Possible_Days
+Percentage,Days_Presenet divided by Present_Days
+Contract Type,11 or 12 month employee
+Start Date,Start date of employement
