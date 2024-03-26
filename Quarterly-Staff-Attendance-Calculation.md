@@ -16,9 +16,18 @@ SELECT
     WHEN EXTRACT(MONTH FROM In_Time) = 10 THEN 21
     WHEN EXTRACT(MONTH FROM In_Time) = 11 THEN 16
     WHEN EXTRACT(MONTH FROM In_Time) = 12 THEN 16 
-    WHEN EXTRACT(MONTH FROM In_Time) = 1 THEN 21 
-    WHEN EXTRACT(MONTH FROM In_Time) = 2 THEN 17
+    WHEN EXTRACT(MONTH FROM In_Time) = 1 THEN 19 
+    WHEN EXTRACT(MONTH FROM In_Time) = 2 THEN 16
     END AS School_Days,
+  CASE -- Staff in Service Days
+    WHEN EXTRACT(MONTH FROM In_Time) = 8 THEN 9
+    WHEN EXTRACT(MONTH FROM In_Time) = 9 THEN 20
+    WHEN EXTRACT(MONTH FROM In_Time) = 10 THEN 21
+    WHEN EXTRACT(MONTH FROM In_Time) = 11 THEN 17
+    WHEN EXTRACT(MONTH FROM In_Time) = 12 THEN 16 
+    WHEN EXTRACT(MONTH FROM In_Time) = 1 THEN 19 
+    WHEN EXTRACT(MONTH FROM In_Time) = 2 THEN 18
+    END AS Staff_In_Service_Days,
   COUNT(CASE WHEN Pay_Code IN ('ABSENT','SICK','UNPAID TIME OFF','PERSONAL','LONGEVITY DAYS') THEN 'Unexcused' END) AS Unexcused_Abs, -- Unexcused Absence
   COUNT(CASE WHEN Pay_Code IN ('COVID SICK','JURY','PROFESSIONAL DEVELOPMENT','RELIGIOUS OBSERVATION','VACATION') THEN 'Excused' END) AS Excused_Abs, -- Excused Absence
   CASE -- Half or Whole Days
@@ -50,9 +59,18 @@ SELECT
     WHEN EXTRACT(MONTH FROM In_Time) = 10 THEN 21
     WHEN EXTRACT(MONTH FROM In_Time) = 11 THEN 16
     WHEN EXTRACT(MONTH FROM In_Time) = 12 THEN 16 
-    WHEN EXTRACT(MONTH FROM In_Time) = 1 THEN 21 
-    WHEN EXTRACT(MONTH FROM In_Time) = 2 THEN 17
+    WHEN EXTRACT(MONTH FROM In_Time) = 1 THEN 19 
+    WHEN EXTRACT(MONTH FROM In_Time) = 2 THEN 16
     END AS School_Days,
+  CASE -- Staff in Service Days
+    WHEN EXTRACT(MONTH FROM In_Time) = 8 THEN 9
+    WHEN EXTRACT(MONTH FROM In_Time) = 9 THEN 20
+    WHEN EXTRACT(MONTH FROM In_Time) = 10 THEN 21
+    WHEN EXTRACT(MONTH FROM In_Time) = 11 THEN 17
+    WHEN EXTRACT(MONTH FROM In_Time) = 12 THEN 16 
+    WHEN EXTRACT(MONTH FROM In_Time) = 1 THEN 19 
+    WHEN EXTRACT(MONTH FROM In_Time) = 2 THEN 18
+    END AS Staff_In_Service_Days,
   COUNT(CASE WHEN Pay_Code IN ('ABSENT','SICK','UNPAID TIME OFF','PERSONAL','LONGEVITY DAYS','VACATION') THEN 'Unexcused' END) AS Unexcused_Abs, -- Unexcused Absence
   COUNT(CASE WHEN Pay_Code IN ('COVID SICK','JURY','PROFESSIONAL DEVELOPMENT','RELIGIOUS OBSERVATION') THEN 'Excused' END) AS Excused_Abs, -- Excused Absence
   CASE -- Half or Whole Days
@@ -77,6 +95,7 @@ SELECT
   sub.school_days - sub.Excused_Abs_Calc AS Possible_Days,
   ROUND((sub.school_days - (sub.Excused_Abs_Calc + sub.Unexcused_Abs_Calc))/(sub.school_days - sub.Excused_Abs_Calc),2) AS Percentage,
   sub.School_Days,
+  sub.Staff_In_Service_Days,
   sub.Contract_Type
 FROM
 (SELECT 
@@ -85,6 +104,7 @@ FROM
   Last_Name,
   Month,
   School_Days,
+  Staff_In_Service_Days,
   SUM(Excused_Abs * Days) OVER (PARTITION BY First_Name,Last_Name,Month,School_Days,Campus,Contract_Type,Position_ID ) AS Excused_Abs_Calc,
   SUM(Unexcused_Abs * Days) OVER (PARTITION BY First_Name,Last_Name,Month,School_Days,Campus,Contract_Type,Position_ID) AS Unexcused_Abs_Calc,
   Campus,
@@ -104,6 +124,7 @@ SELECT
   sub.school_days - sub.Excused_Abs_Calc AS Possible_Days,
   ROUND((sub.school_days - (sub.Excused_Abs_Calc + sub.Unexcused_Abs_Calc))/(sub.school_days - sub.Excused_Abs_Calc),2) AS Percentage,
   sub.School_Days,
+  sub.Staff_In_Service_Days,
   sub.Contract_Type
 FROM
 (SELECT 
@@ -112,6 +133,7 @@ FROM
   Last_Name,
   Month,
   School_Days,
+  Staff_In_Service_Days,
   SUM(Excused_Abs * Days) OVER (PARTITION BY First_Name,Last_Name,Month,School_Days,Campus,Contract_Type,Position_ID ) AS Excused_Abs_Calc,
   SUM(Unexcused_Abs * Days) OVER (PARTITION BY First_Name,Last_Name,Month,School_Days,Campus,Contract_Type,Position_ID) AS Unexcused_Abs_Calc,
   Campus,
@@ -132,6 +154,7 @@ SELECT
   sub.school_days - sub.Excused_Abs_Calc AS Possible_Days,
   ROUND((sub.school_days - (sub.Excused_Abs_Calc + sub.Unexcused_Abs_Calc))/(sub.school_days - sub.Excused_Abs_Calc),2) AS Percentage,
   sub.School_Days,
+  sub.Staff_In_Service_Days,
   sub.Contract_Type
 FROM
 (SELECT 
@@ -140,6 +163,7 @@ FROM
   Last_Name,
   Month,
   School_Days,
+  Staff_In_Service_Days,
   SUM(Excused_Abs * Days) OVER (PARTITION BY First_Name,Last_Name,Month,School_Days,Campus,Contract_Type,Position_ID ) AS Excused_Abs_Calc,
   SUM(Unexcused_Abs * Days) OVER (PARTITION BY First_Name,Last_Name,Month,School_Days,Campus,Contract_Type,Position_ID) AS Unexcused_Abs_Calc,
   Campus,
@@ -157,6 +181,7 @@ SELECT
   sub.school_days - sub.Excused_Abs_Calc AS Possible_Days,
   ROUND((sub.school_days - (sub.Excused_Abs_Calc + sub.Unexcused_Abs_Calc))/(sub.school_days - sub.Excused_Abs_Calc),2) AS Percentage,
   sub.School_Days,
+  sub.Staff_In_Service_Days,
   sub.Contract_Type
 FROM
 (SELECT 
@@ -165,6 +190,7 @@ FROM
   Last_Name,
   Month,
   School_Days,
+  Staff_In_Service_Days,
   SUM(Excused_Abs * Days) OVER (PARTITION BY First_Name,Last_Name,Month,School_Days,Campus,Contract_Type,Position_ID ) AS Excused_Abs_Calc,
   SUM(Unexcused_Abs * Days) OVER (PARTITION BY First_Name,Last_Name,Month,School_Days,Campus,Contract_Type,Position_ID) AS Unexcused_Abs_Calc,
   Campus,
