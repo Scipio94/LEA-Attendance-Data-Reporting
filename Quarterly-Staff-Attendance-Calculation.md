@@ -50,9 +50,7 @@ FROM
   Month,
   School_Days,
   Staff_In_Service_Days,
-  SUM(Excused_Abs_12MTH * Days) OVER (PARTITION BY First_Name,Last_Name,Month,School_Days,Campus,Contract_Type,Position_ID ) AS Excused_Abs_Calc_12MTH,
   SUM(Excused_Abs_11MTH * Days) OVER (PARTITION BY First_Name,Last_Name,Month,School_Days,Campus,Contract_Type,Position_ID ) AS Excused_Abs_Calc_11MTH,
-  SUM(Unexcused_Abs_12MTH * Days) OVER (PARTITION BY First_Name,Last_Name,Month,School_Days,Campus,Contract_Type,Position_ID) AS Unexcused_Abs_Calc_12MTH,
   SUM(Unexcused_Abs_11MTH * Days) OVER (PARTITION BY First_Name,Last_Name,Month,School_Days,Campus,Contract_Type,Position_ID) AS Unexcused_Abs_Calc_11MTH,
   Campus,
   Contract_Type
@@ -80,9 +78,7 @@ FROM
   School_Days,
   Staff_In_Service_Days,
   SUM(Excused_Abs_12MTH * Days) OVER (PARTITION BY First_Name,Last_Name,Month,School_Days,Campus,Contract_Type,Position_ID ) AS Excused_Abs_Calc_12MTH,
-  SUM(Excused_Abs_11MTH * Days) OVER (PARTITION BY First_Name,Last_Name,Month,School_Days,Campus,Contract_Type,Position_ID ) AS Excused_Abs_Calc_11MTH,
   SUM(Unexcused_Abs_12MTH * Days) OVER (PARTITION BY First_Name,Last_Name,Month,School_Days,Campus,Contract_Type,Position_ID) AS Unexcused_Abs_Calc_12MTH,
-  SUM(Unexcused_Abs_11MTH * Days) OVER (PARTITION BY First_Name,Last_Name,Month,School_Days,Campus,Contract_Type,Position_ID) AS Unexcused_Abs_Calc_11MTH,
   Campus,
   Contract_Type
 FROM t1
