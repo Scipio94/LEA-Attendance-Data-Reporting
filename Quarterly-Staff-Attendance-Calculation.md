@@ -171,7 +171,7 @@ FROM
 FROM tw_mth) AS sub
 UNION ALL -- Combining outputs
 /*Attendance Calculation el_mth*/
-SELECT
+SELECT -- Combining Outputs
   DISTINCT sub.Position_ID,
   sub.first_name,
   sub.last_name,
