@@ -88,9 +88,15 @@ FROM t1
 WHERE Week IS NOT NULL AND Contract_Type = '12 MTH') AS sub)
 
 /*Combning 11 MTH and 12 MTH Weekly Attedance Data Calculations*/
-SELECT * -- Combining Outputs
+SELECT -- Weekly Attendance Percentage Agg
+  sub.Week,
+  ROUND(AVG(sub.Percentage),2) AS Week_Att_Percentage 
+FROM
+(SELECT * 
 FROM t2
 UNION ALL
 SELECT *
-FROM t3
+FROM t3) AS sub
+GROUP BY sub.Week
+ORDER BY sub.Week
 ~~~
