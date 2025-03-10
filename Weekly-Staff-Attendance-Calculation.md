@@ -13,11 +13,57 @@ WITH t1 AS
     WHEN In_Time >= '2024-08-19' AND  In_Time <='2024-08-23'THEN 1
     WHEN In_Time >= '2024-08-26' AND  In_time <= '2024-08-30' THEN 2
     WHEN In_Time >= '2024-09-03' AND In_Time <= '2024-09-06' THEN 3
+    WHEN In_Time >= '2024-09-09' AND In_Time <= '2024-09-13' THEN 4
+    WHEN In_Time >= '2024-09-16' AND In_Time <= '2024-09-20' THEN 5
+    WHEN In_Time >= '2024-09-23' AND In_Time <= '2024-09-27' THEN 6
+    WHEN In_Time >= '2024-09-30' AND In_Time <= '2024-10-04' THEN 7
+    WHEN In_Time >= '2024-10-07' AND In_Time <= '2024-10-11' THEN 8
+    WHEN In_Time >= '2024-10-14' AND In_Time <= '2024-10-18' THEN 9
+    WHEN In_Time >= '2024-10-21' AND In_Time <= '2024-10-25' THEN 10
+    WHEN In_Time >= '2024-10-28' AND In_Time <= '2024-11-01' THEN 11
+    WHEN In_Time >= '2024-11-04' AND In_Time <= '2024-11-08' THEN 12
+    WHEN In_Time >= '2024-11-11' AND In_Time <= '2024-11-15' THEN 13
+    WHEN In_Time >= '2024-11-18' AND In_Time <= '2024-11-22' THEN 14
+    WHEN In_Time >= '2024-12-02' AND In_Time <= '2024-12-06' THEN 16
+    WHEN In_Time >= '2024-12-09' AND In_Time <= '2024-12-13' THEN 17
+    WHEN In_Time >= '2024-12-16' AND In_Time <= '2024-12-20' THEN 18
+    WHEN In_Time >= '2025-01-06' AND In_Time <= '2025-01-10' THEN 19
+    WHEN In_Time >= '2025-01-13' AND In_Time <= '2025-01-17' THEN 20
+    WHEN In_Time >= '2025-01-20' AND In_Time <= '2025-01-24' THEN 21
+    WHEN In_Time >= '2025-01-27' AND In_Time <= '2025-01-31' THEN 22
+    WHEN In_Time >= '2025-02-03' AND In_Time <= '2025-02-07' THEN 23
+    WHEN In_Time >= '2025-02-10' AND In_Time <= '2025-02-14' THEN 24
+    WHEN In_Time >= '2025-02-17' AND In_Time <= '2025-02-21' THEN 25
+    WHEN In_Time >= '2025-02-24' AND In_Time <= '2025-02-28' THEN 26
+    WHEN In_Time >= '2025-03-03' AND In_Time <= '2025-03-07' THEN 27
   END AS Week,
    CASE 
     WHEN In_Time >= '2024-08-19' AND  In_Time <='2024-08-23' THEN 5
     WHEN In_Time >= '2024-08-26' AND  In_time <= '2024-08-30' THEN 5
     WHEN In_Time >= '2024-09-03' AND In_Time <= '2024-09-06' THEN 4
+    WHEN In_Time >= '2024-09-09' AND In_Time <= '2024-09-13' THEN 5
+    WHEN In_Time >= '2024-09-16' AND In_Time <= '2024-09-20' THEN 5
+    WHEN In_Time >= '2024-09-23' AND In_Time <= '2024-09-27' THEN 5
+    WHEN In_Time >= '2024-09-30' AND In_Time <= '2024-10-04' THEN 5
+    WHEN In_Time >= '2024-10-07' AND In_Time <= '2024-10-11' THEN 5
+    WHEN In_Time >= '2024-10-14' AND In_Time <= '2024-10-18' THEN 4
+    WHEN In_Time >= '2024-10-21' AND In_Time <= '2024-10-25' THEN 5
+    WHEN In_Time >= '2024-10-28' AND In_Time <= '2024-11-01' THEN 5
+    WHEN In_Time >= '2024-11-04' AND In_Time <= '2024-11-08' THEN 5
+    WHEN In_Time >= '2024-11-11' AND In_Time <= '2024-11-15' THEN 5
+    WHEN In_Time >= '2024-11-18' AND In_Time <= '2024-11-22' THEN 5
+    WHEN In_Time >= '2024-12-02' AND In_Time <= '2024-12-06' THEN 5
+    WHEN In_Time >= '2024-12-09' AND In_Time <= '2024-12-13' THEN 5
+    WHEN In_Time >= '2024-12-16' AND In_Time <= '2024-12-20' THEN 5
+    WHEN In_Time >= '2025-01-06' AND In_Time <= '2025-01-10' THEN 5
+    WHEN In_Time >= '2025-01-13' AND In_Time <= '2025-01-17' THEN 5
+    WHEN In_Time >= '2025-01-20' AND In_Time <= '2025-01-24' THEN 4
+    WHEN In_Time >= '2025-01-27' AND In_Time <= '2025-01-31' THEN 5
+    WHEN In_Time >= '2025-02-03' AND In_Time <= '2025-02-07' THEN 5
+    WHEN In_Time >= '2025-02-10' AND In_Time <= '2025-02-14' THEN 4
+    WHEN In_Time >= '2025-02-17' AND In_Time <= '2025-02-21' THEN 4
+    WHEN In_Time >= '2025-02-24' AND In_Time <= '2025-02-28' THEN 5
+    WHEN In_Time >= '2025-03-03' AND In_Time <= '2025-03-07' THEN 5
     END AS Week_School_Days,
   COUNT(CASE WHEN Contract_Type = '12 MTH' AND Pay_Code IN('ABSENT','SICK','UNPAID TIME OFF','PERSONAL','LONGEVITY DAYS') THEN 'Unexcused' END) AS Unexcused_Abs_12MTH,
   COUNT(CASE WHEN Contract_Type = '12 MTH' AND Pay_Code IN ('COVID SICK','JURY','PROFESSIONAL DEVELOPMENT','RELIGIOUS OBSERVATION','VACATION','WC') THEN 'Excused' END) AS Excused_Abs_12MTH,
@@ -30,7 +76,7 @@ WITH t1 AS
     END AS Days, 
 Campus,
 Contract_Type
-FROM `my-data-project-36654.Quarterly_Attendance.Att_08_24`
+FROM `my-data-project-36654.Quarterly_Attendance.Staff_Attendance_Agg`
 GROUP BY Position_ID,First_Name,Last_Name,In_time,Out_time,Hours,Pay_Code, Campus,Contract_Type, Position_ID),
 
 t2 AS
@@ -87,8 +133,9 @@ FROM
 FROM t1
 WHERE Week IS NOT NULL AND Contract_Type = '12 MTH') AS sub)
 
-/*Combning 11 MTH and 12 MTH Weekly Attedance Data Calculations*/
+/*Combining 11 MTH and 12 MTH Weekly Attedance Data Calculations*/
 SELECT -- Weekly Attendance Percentage Agg
+  sub.Campus,
   sub.Week,
   ROUND(AVG(sub.Percentage),2) AS Week_Att_Percentage 
 FROM
@@ -97,6 +144,8 @@ FROM t2
 UNION ALL
 SELECT *
 FROM t3) AS sub
-GROUP BY sub.Week
+WHERE sub.Week = 27 -- Filter for week
+GROUP BY sub.Campus,sub.Week
 ORDER BY sub.Week
+
 ~~~
