@@ -1,6 +1,5 @@
-# Staff Attendance Reporting
-Data cleaning and calculation of staff attendance on a quarterly, monthly, and weekly cadence.
-
+# LEA Attendance Reporting
+Data cleaning and calculation of staff attendance on a quarterly, monthly, and weekly cadence via utilizing SQL for tracking, reporting, and analysis.
 
 ## Variables
 Attendance metrics for **11 MONTH** and **12 MONTH** staff is to be calculated differently.
@@ -15,5 +14,7 @@ Attendance metrics for **11 MONTH** and **12 MONTH** staff is to be calculated d
   
 - 11 MONTH STAFF:
     - Vacation days are counted towards unexcused absences.
+ 
+
 
 
