@@ -36,6 +36,12 @@ WITH t1 AS
     WHEN In_Time >= '2025-02-17' AND In_Time <= '2025-02-21' THEN 25
     WHEN In_Time >= '2025-02-24' AND In_Time <= '2025-02-28' THEN 26
     WHEN In_Time >= '2025-03-03' AND In_Time <= '2025-03-07' THEN 27
+    WHEN In_Time >= '2025-03-10' AND In_Time <= '2025-03-14' THEN 28
+    WHEN In_Time >= '2025-03-17' AND In_Time <= '2025-03-21' THEN 29
+    WHEN In_Time >= '2025-03-24' AND In_Time <= '2025-03-28' THEN 30
+    WHEN In_Time >= '2025-03-31' AND In_Time <= '2025-04-04' THEN 31
+    WHEN In_Time >= '2025-04-07' AND In_Time <= '2025-04-11' THEN 32
+    WHEN In_Time >= '2025-04-14' AND In_Time <= '2025-04-18' THEN 33
   END AS Week,
    CASE 
     WHEN In_Time >= '2024-08-19' AND  In_Time <='2024-08-23' THEN 5
@@ -64,6 +70,12 @@ WITH t1 AS
     WHEN In_Time >= '2025-02-17' AND In_Time <= '2025-02-21' THEN 4
     WHEN In_Time >= '2025-02-24' AND In_Time <= '2025-02-28' THEN 5
     WHEN In_Time >= '2025-03-03' AND In_Time <= '2025-03-07' THEN 5
+    WHEN In_Time >= '2025-03-10' AND In_Time <= '2025-03-14' THEN 5
+    WHEN In_Time >= '2025-03-17' AND In_Time <= '2025-03-21' THEN 5
+    WHEN In_Time >= '2025-03-24' AND In_Time <= '2025-03-28' THEN 4
+    WHEN In_Time >= '2025-03-31' AND In_Time <= '2025-04-04' THEN 5
+    WHEN In_Time >= '2025-04-07' AND In_Time <= '2025-04-11' THEN 5
+    WHEN In_Time >= '2025-04-14' AND In_Time <= '2025-04-18' THEN 4
     END AS Week_School_Days,
   COUNT(CASE WHEN Contract_Type = '12 MTH' AND Pay_Code IN('ABSENT','SICK','UNPAID TIME OFF','PERSONAL','LONGEVITY DAYS') THEN 'Unexcused' END) AS Unexcused_Abs_12MTH,
   COUNT(CASE WHEN Contract_Type = '12 MTH' AND Pay_Code IN ('COVID SICK','JURY','PROFESSIONAL DEVELOPMENT','RELIGIOUS OBSERVATION','VACATION','WC') THEN 'Excused' END) AS Excused_Abs_12MTH,
@@ -144,8 +156,7 @@ FROM t2
 UNION ALL
 SELECT *
 FROM t3) AS sub
-WHERE sub.Week = 27 -- Filter for week
+WHERE sub.Week = 33 -- Filter for week
 GROUP BY sub.Campus,sub.Week
 ORDER BY sub.Week
-
 ~~~
